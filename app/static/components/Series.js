@@ -34,7 +34,7 @@ class Series extends React.Component{
 	      .then(function (series) {
 	        this.setState(function () {
 	          return {
-	            series: series.objects
+	            series: series
 	          }
 	        });
 	      }.bind(this));

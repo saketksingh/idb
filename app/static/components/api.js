@@ -2,162 +2,165 @@ var axios = require('axios');
 
 var baseURL = "http://52.201.212.202/api/";
 
-module.exports = {
+module.exports = { 
 
-    // ************************************************************************
-    // Begin scraping model homepages, returns 6 individual instances per query
-    // ************************************************************************
+	// ************************************************************************
+	// Begin scraping model homepages, returns 6 individual instances per query
+	// ************************************************************************
 
-    getCharacters: function(page) {
+	getCharacters: function () {
 
-        // Endpoint is character... but returns many characters...
-        // (╯°□°)╯︵ ┻━┻ 
+		// Endpoint is character... but returns many characters...
+		// (╯°□°)╯︵ ┻━┻
 
-        var encodedURI = window.encodeURI(baseURL + "character");
+	    var encodedURI = window.encodeURI(baseURL + "character"); 
 
-        return axios.get(encodedURI, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+		 return axios.get(encodedURI, {
+		 	headers: {
+		 		'Content-Type': 'application/json'
+		 	}
+		 }
+		 	)
+	    .then(function (response) {
+	      	console.log("In getCharacters: " + response.data.objects);
+      
+   		return response.data.objects;
+		}).catch(function (error) {
+    		console.log(error);
+  		});
+	},
 
-                params: {
-                    'page': page
-                }
-            })
-            .then(function(response) {
-                console.log("In getCharacters: ");
-                console.log(response);
+	getCreators: function () {
+	    var encodedURI = window.encodeURI(baseURL + "creator");
 
-                return response.data;
-            }).catch(function(error) {
-                console.log(error);
-            });
-    },
+		 return axios.get(encodedURI, {
+		 	headers: {
+		 		'Content-Type': 'application/json'
+		 	}
+		 }
+		 	)
+	    .then(function (response) {
+	      	console.log("In getCreators: " + response.data.objects);
+      
+   		return response.data.objects;
+		}).catch(function (error) {
+    		console.log(error);
+  		});
+	},
 
-    getCreators: function() {
-        var encodedURI = window.encodeURI(baseURL + "creator");
+	getEvents: function () {
+	    var encodedURI = window.encodeURI(baseURL + "event");
 
-        return axios.get(encodedURI, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(function(response) {
-                console.log("In getCreators: " + response.data);
+		 return axios.get(encodedURI, {
+		 	headers: {
+		 		'Content-Type': 'application/json'
+		 	}
+		 }
+		 	)
+	    .then(function (response) {
+	      	console.log("In getEvents: " + response.data.objects);
+      
+   		return response.data.objects;
+		}).catch(function (error) {
+    		console.log(error);
+  		});
+	},
 
-                return response.data;
-            }).catch(function(error) {
-                console.log(error);
-            });
-    },
+	getSeries: function () {
+	    var encodedURI = window.encodeURI(baseURL + "series");
 
-    getEvents: function() {
-        var encodedURI = window.encodeURI(baseURL + "event");
+		 return axios.get(encodedURI, {
+		 	headers: {
+		 		'Content-Type': 'application/json'
+		 	}
+		 }
+		 	)
+	    .then(function (response) {
+	      	console.log("In getSeries: " + response.data.objects);
+      
+   		return response.data.objects;
+		}).catch(function (error) {
+    		console.log(error);
+  		});
+	},
 
-        return axios.get(encodedURI, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(function(response) {
-                console.log("In getEvents: " + response.data);
+	// *******************************************************************
+	// Begin scraping individual model instances, one instance is returned
+	// *******************************************************************
 
-                return response.data;
-            }).catch(function(error) {
-                console.log(error);
-            });
-    },
+	getCharacter: function (id) {
+	    var encodedURI = window.encodeURI(baseURL + "character/" + id);
 
-    getSeries: function() {
-        var encodedURI = window.encodeURI(baseURL + "series");
+		 return axios.get(encodedURI, {
+		 	headers: {
+		 		'Content-Type': 'application/json'
+		 	}
+		 }
+		 	)
+	    .then(function (response) {
+	      	console.log("In getCharacter: " + response.data);
+   			return response.data;
 
-        return axios.get(encodedURI, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(function(response) {
-                console.log("In getSeries: " + response.data);
+		}).catch(function (error) {
+    		console.log(error);
+  		});
+	},
 
-                return response.data;
-            }).catch(function(error) {
-                console.log(error);
-            });
-    },
+	getCreator: function (id) {
+	    var encodedURI = window.encodeURI(baseURL + "creator/" + id);
 
-    // *******************************************************************
-    // Begin scraping individual model instances, one instance is returned
-    // *******************************************************************
+		 return axios.get(encodedURI, {
+		 	headers: {
+		 		'Content-Type': 'application/json'
+		 	}
+		 }
+		 	)
+	    .then(function (response) {
+	      	console.log("In getCreator: " + response.data);
+   			return response.data;
 
-    getCharacter: function(id) {
-        var encodedURI = window.encodeURI(baseURL + "character/" + id);
+		}).catch(function (error) {
+    		console.log(error);
+  		});
+	},
 
-        return axios.get(encodedURI, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(function(response) {
-                console.log("In getCharacter: " + response.data);
-                return response.data;
+	getEvent: function (id) {
+	    var encodedURI = window.encodeURI(baseURL + "event/" + id);
 
-            }).catch(function(error) {
-                console.log(error);
-            });
-    },
+		 return axios.get(encodedURI, {
+		 	headers: {
+		 		'Content-Type': 'application/json'
+		 	}
+		 }
+		 	)
+	    .then(function (response) {
+	      	console.log("In getEvent: " + response.data);
+   			return response.data;
 
-    getCreator: function(id) {
-        var encodedURI = window.encodeURI(baseURL + "creator/" + id);
+		}).catch(function (error) {
+    		console.log(error);
+  		});
+	},
 
-        return axios.get(encodedURI, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(function(response) {
-                console.log("In getCreator: " + response.data);
-                return response.data;
+	// Downsides of being both plural and singular, and no method overloading
+	// ┬─┬﻿ ︵ /(.□. \）
+	
+	getOneSeries: function (id) {
+	    var encodedURI = window.encodeURI(baseURL + "series/" + id);
 
-            }).catch(function(error) {
-                console.log(error);
-            });
-    },
+		 return axios.get(encodedURI, {
+		 	headers: {
+		 		'Content-Type': 'application/json'
+		 	}
+		 }
+		 	)
+	    .then(function (response) {
+	      	console.log("In getOneSeries: " + response.data);
+   			return response.data;
 
-    getEvent: function(id) {
-        var encodedURI = window.encodeURI(baseURL + "event/" + id);
+		}).catch(function (error) {
+    		console.log(error);
+  		});
+	}
 
-        return axios.get(encodedURI, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(function(response) {
-                console.log("In getEvent: " + response.data);
-                return response.data;
-
-            }).catch(function(error) {
-                console.log(error);
-            });
-    },
-
-    // Downsides of being both plural and singular, and no method overloading
-    // ┬─┬﻿ ︵ /(.□. \）
-
-    getOneSeries: function(id) {
-        var encodedURI = window.encodeURI(baseURL + "series/" + id);
-
-        return axios.get(encodedURI, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(function(response) {
-                console.log("In getOneSeries: " + response.data);
-                return response.data;
-
-            }).catch(function(error) {
-                console.log(error);
-            });
-    },
-
-};
+ };
